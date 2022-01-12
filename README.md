@@ -2,5 +2,5 @@
     npm install
 # To start server
     nodemon index.js
-# For API's refer to API.txt file in current directory    
+# For accessing API's refer to API.txt file in current directory    
     
