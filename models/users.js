@@ -1,6 +1,6 @@
 const mongoose=require("mongoose")
-const User_schema = mongoose.model('User_schema', { 
-	_id : String,
+const User_schema = mongoose.model('user_schema', { 
+	_id :  String,
 	username : String,
 	hash : String,
 	email :String,
