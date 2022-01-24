@@ -1,12 +1,10 @@
 const mongoose=require("mongoose")
 const photoschema = new mongoose.Schema({
   user : {
-    type: String,
-    ref: 'User'
+    type: String
   },
   photos : [{
-  	type: String,
-    ref: 'User'
+  	type: String
   }],
 });
 const photos = mongoose.model('photos',photoschema)
