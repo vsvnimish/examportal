@@ -1,20 +1,16 @@
 const mongoose=require("mongoose")
 const friendschema = new mongoose.Schema({
   user : {
-    type: String,
-    ref: 'User'
+    type: String
   },
   friends : [{
-  	type: String,
-    ref: 'User'
+  	type: String
   }],
   requested_friends : [{
-  	type: String,
-    ref: 'User'
+  	type: String
   }] ,
   followers : [{
-    type: String,
-    ref: 'User'
+    type: String
   }] 
 });
 const friends = mongoose.model('friends',friendschema)
