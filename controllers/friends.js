@@ -72,7 +72,7 @@ const get_friend_sugg = async(req,res) =>{
     res.status(200).json(new_sugg_list)
 }
 const followuser = async(req,res)=>{
-      await friends.updateOne({user : req.data._id},{$push: {followers : req.params.userid}}) 
+      await friends.updateOne({user : req.params.userid},{$push: {followers : req.data._id}}) 
       res.status(200).json('started following')
 }
 const unfollowuser = async(req,res)=>{
