@@ -1,9 +1,9 @@
 API's for                                            
-POST : send_friend_req : http://localhost:3000/friends/send_friend_req/'userid'
+POST : send_friend_req : http://localhost:3000/friends/send_friend_req/'username'
 GET : get_friend_req : http://localhost:3000/friends/get_friend_req
-POST : approve_friend_req : http://localhost:3000/friends/approve_friend_req/'userid'
+POST : approve_friend_req : http://localhost:3000/friends/approve_friend_req/'username'
 GET : get_friends : http://localhost:3000/friends/get_friends
-POST : remove_friend : http://localhost:3000/friends/remove_friend/'userid'
+POST : remove_friend : http://localhost:3000/friends/remove_friend/'username'
 GET : get_friend_suggestions : http://localhost:3000/friends/get_friend_sugg
 POST : uploadphoto : http://localhost:3000/photoservice/uploadphoto
 GET : getphoto : http://localhost:3000/photoservice/getphoto
