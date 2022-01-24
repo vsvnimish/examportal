@@ -3,6 +3,7 @@ require('dotenv').config();
 const nodemailer = require("nodemailer");
 const jwt = require('jsonwebtoken');
 const userdb=require('../services/userdb')
+const user_schema=require('../models/users').User_schema
 const create_object = (obj) => {
 	var user = {
 		_id : obj._id,
@@ -50,8 +51,24 @@ const send_verification_mail = async (info) => {
     console.log(year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds);
     return year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds
 } 
+const get_usernames = async (userid) =>{
+	console.log(userid)
+	const userids = userid.map((user)=>{return {'_id' : user}})
+	try{
+		const data =await user_schema.find({$or : userids})
+	    const usernames = data.map((user)=>{
+		  return user.username
+	    })
+        return usernames
+	}
+	catch{
+		return []
+	}
+	
+}
 module.exports={
 	create_object,
 	send_verification_mail,
-	time
+	time,
+	get_usernames
 }
