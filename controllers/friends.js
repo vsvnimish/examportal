@@ -36,7 +36,7 @@ const pre = async (req,res,next) =>{
     next()    
 }
 const send_friend_req = async (req,res) => {
-    await friends.updateOne({user : req.data._id }, { $push: { requested_friends : req.params.userid } })
+    await friends.updateOne({user : req.params.userid }, { $push: { requested_friends : req.data._id } })
     res.status(200).json({msg : "request sent"})
 } 
 const get_friend_req = async(req,res) =>{

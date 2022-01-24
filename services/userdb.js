@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 const user_schema=require('../models/users').User_schema
-mongoose.connect('mongodb://localhost:27017/test');
+console.log('userdb')
+mongoose.connect('mongodb://localhost:27017/test',function(err,data){
+	if(err)
+		 console.log(err)
+});
 console.log("running")
 const  add_user = async (user) => {
 	const len = await find_user({username : user.username})

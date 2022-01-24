@@ -7,7 +7,9 @@ const cors = require('cors');
 const multer = require('multer')
 const path=require('path')
 const photo_db = require('../models/photoservice')
+const emailchecker=require('../middlewares/emailchecker')
 router.use(auth.auth)
+router.use(emailchecker)
 router.use(cors());
 // parse routerlication/json
 router.use(bodyParser.json());
