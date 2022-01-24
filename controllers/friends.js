@@ -50,7 +50,7 @@ const approve_friend_req = async(req,res) =>{
   res.status(200).json('aprroved')
 }
 const reject_friend_req= async(req,res) =>{
-  await friends.updateOne({user : req.data.id},{$pull: {requested_friends : req.params.username }}) 
+  await friends.updateOne({user : req.data.username},{$pull: {requested_friends : req.params.username }}) 
   res.status(200).json('rejected')
 }
 const get_friends = async(req,res) =>{

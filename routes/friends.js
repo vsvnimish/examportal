@@ -16,4 +16,5 @@ router.post('/remove_friend/:username',friends.remove_friend)
 router.get('/get_friend_sugg',friends.get_friend_sugg)
 router.post('/followuser/:username',friends.followuser)
 router.post('/unfollowuser/:username',friends.unfollowuser)
+router.post('/reject_friend_req/:username',friends.reject_friend_req)
 module.exports = router;
