@@ -66,7 +66,7 @@ const get_friend_sugg = async(req,res) =>{
   const data=await user_schema.findOne({username : req.data.username})
   const friends_list=await friends.findOne({user : req.data.username}) 
   friends_list.friends.push(req.data.username)
-  const sugg_list = await user_schema.find({username : {$nin : friends_list.friends}})
+  const sugg_list = await user_schema.find({$and :[{username : {$nin : friends_list.friends}},{loc : data.loc}]})
   const u_sugg = sugg_list.map((user)=>{return user.username})
   res.status(200).json(u_sugg)
 }
