@@ -5,7 +5,7 @@ const photoschema = new mongoose.Schema({
   },
   photos : [{
   	type: String
-  }],
+  }]
 });
 const photos = mongoose.model('photos',photoschema)
 module.exports = photos;
