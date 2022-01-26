@@ -40,30 +40,29 @@ const email_verify =async (req,res) => {
 		if(data.length!=0){
 		  await user_schema.updateOne({username : req.data.username},{email_verified : true})
 		  if(req.data.parent=='forgot_password'){
-             res.status(200).json({'msg' : 'verified succesfully,use below token for changing password','token' : req.token})   
-          } 
+                    res.status(200).json({'msg' : 'verified succesfully,use below token for changing password','token' : req.token})   
+                  } 
 		  else{
-            res.status(200).json("your email has been verified succesfully")
-          }
+                  res.status(200).json("your email has been verified succesfully")
+                  }
 		}
-		else{
-            await user_schema.deleteMany({email : req.data.email})
-            const info=create_obj(req.data)
-            info.email_verified=true
-            info.created_at= help.time()
-            info.updated_at= help.time()
-            var newuser=new user_schema(info)
-            await newuser.save()
-            res.status(200).json("your account has been succesfully added")
+	        else{
+                    await user_schema.deleteMany({email : req.data.email})
+                    const info=create_obj(req.data)
+                    info.email_verified=true
+                    info.created_at= help.time()
+                    info.updated_at= help.time()
+                    var newuser=new user_schema(info)
+                    await newuser.save()
+                    res.status(200).json("your account has been succesfully added")
 		}
 	}
 	else{
-		res.status(500).json("invalid otp")
+	   res.status(500).json("invalid otp")
 	}	
 }
 const get_profile = async (req,res) => {
 	const acess_user = await user_schema.findOne({_id : req.params.id})
-
 	if(acess_user.status != "private")
 		res.status(200).json(acess_user.username+" "+acess_user.loc)
 	else
@@ -81,7 +80,7 @@ const update_profile =async (req,res) => {
 	else if(!acess_user.email_verified)
 		return res.status(200).json("cannot update,because email is not verified")
 	else
-       return  res.status(200).json("not your account")
+           return  res.status(200).json("not your account")
 
 }
 const get_user = async (req,res) => {
