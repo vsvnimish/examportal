@@ -6,18 +6,16 @@ POST : signup : http://localhost:3000/users/signup
          "email" : "mailid",
          "status" : "public/private",
          "loc" : "your location"
-       }
-       Bearer Token : 'required if you have verified your mail else not required'   
+       }  
 POST : login  : http://localhost:3000/login
        body : {
           "username" : 'username',
           "password" : 'password'
         }
 POST : sending verification mail : http://localhost:3000/users/send_verification
-        Beaarer Token : 'enter the token that you have received after login,if you are not logged in then enter the body'
         body : {
-           "username" : 'username',
-           "email" : "mailid"
+            "username" : 'username',
+            "email" : "mailid"
         }
 POST : verifying mail : http://localhost:3000/users/email_verify
         body : {
@@ -26,12 +24,14 @@ POST : verifying mail : http://localhost:3000/users/email_verify
         Beaarer Token : 'enter the token that you have received after sending verification mail'
 POST : forgot_password : http://localhost:3000/users/forgot_password
        body : {
-          "email" : 'mailid'
+          "email" : 'mailid',
+          'username' : 'username'
         }
-POST : change_password : http://localhost:3000/users/change_password/'enter your token that you have received after verifying mail'
+POST : change_password : http://localhost:3000/users/change_password
        body : {
           "password" : 'password'
         }
+        Bearer Token : 'token you have received after verying mail'
 PUT  : update_profile : http://localhost:3000/users/'enter userid'
        body : {
            "status" : "public/private",
