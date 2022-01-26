@@ -21,8 +21,9 @@ const create_object = (obj) => {
 const send_verification_mail = async (info) => {
 	console.log('SE->',process.env.SECRET_KEY)
 	var otp=Math.floor(100000 + Math.random() * 900000) + "";
-	// console.log('data',data)
+	console.log('data',info.email)
 	info.otp=otp
+	console.log('info',info)
 	const token=jwt.sign(info,process.env.SECRET_KEY)
 	let transporter = nodemailer.createTransport({
 		service : 'gmail',
@@ -37,7 +38,10 @@ const send_verification_mail = async (info) => {
          subject: "OTP from nodemailer", // Subject line
          text: otp  // plain text body
      }
-     let inf = await transporter.sendMail(maildetails);
+
+     let inf = await transporter.sendMail(maildetails,(err,data)=>{
+     	// console.log(err)
+     });
      return token
  } 
  const time = ()=>{
