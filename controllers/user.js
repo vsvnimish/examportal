@@ -7,34 +7,33 @@ const help = require('../helpers/help.js')
 const user_schema=require('../models/users').User_schema
 const axios = require('axios')
 const signup = async (req,res) => {
-	req.body.hash=crypto.pbkdf2Sync(req.body.password,process.env.SECRET_KEY,1000, 64, `sha512`).toString(`hex`)
-	req.body._id = uuidv4()
-	req.body.email_verified=false
-	const info = await create_obj(req.body)
-	const username = await user_schema.find({username : req.body.username})
-	const email = await user_schema.find({email: req.body.email})
+    req.body.hash=crypto.pbkdf2Sync(req.body.password,process.env.SECRET_KEY,1000, 64, `sha512`).toString(`hex`)
+    req.body._id = uuidv4()
+    req.body.email_verified=false
+    const info = await create_obj(req.body)
+    const username = await user_schema.find({username : req.body.username})
+    const email = await user_schema.find({email: req.body.email})
     if(email.length!=0){//user with same emailid has been found
-        if(email.email_verified)//if his mail is verified
+	if(email.email_verified)//if his mail is verified
 		   res.status(500).json('invalid email')
-		else{//if not verified
-		   await axios.post('http://localhost:3000/users/send_verification',info).then((response)=>{
-           	  res.status(500).json({msg : 'otp has been sent to your mailid,please verify it for signing up' , token : response.data.token})
-           })    
-		}
+	else{//if not verified
+	   await axios.post('http://localhost:3000/users/send_verification',info).then((response)=>{
+		 res.status(500).json({msg : 'otp has been sent to your mailid,please verify it for signing up' , token : response.data.token})
+	   })    
+	}
     }
     else{ //solo user
-        info.created_at= help.time()
-        info.updated_at= help.time()
-        var newuser=new user_schema(info)
-        await newuser.save()
-        res.status(500).json('added succesfully,please verify your mail')
+	info.created_at= help.time()
+	info.updated_at= help.time()
+	var newuser=new user_schema(info)
+	await newuser.save()
+	res.status(500).json('added succesfully,please verify your mail')
     } 	
 }
 const send_verification = async (req,res) =>{
     res.status(200).json({msg: "verification mail has been sent",token : await help.send_verification_mail(req.body)})	
 }
 const email_verify =async (req,res) => {
-	console.log('req.data',req.data.token)
 	if(req.data.otp==req.body.otp){
 		const data = await user_schema.find({username : req.data.username})
 		if(data.length!=0){
