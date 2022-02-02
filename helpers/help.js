@@ -40,7 +40,7 @@ const send_verification_mail = async (info) => {
      }
 
      let inf = await transporter.sendMail(maildetails,(err,data)=>{
-     	// console.log(err)
+     	 console.log(data)
      });
      return token
  } 

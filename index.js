@@ -5,6 +5,7 @@ var user=require('./routes/user')
 var auth=require('./routes/login')
 var friends = require('./routes/friends')
 var photoservice = require('./routes/photoservice')
+var posts=require('./routes/posts')
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/test',function(err,data){
 	if(err)
@@ -24,3 +25,4 @@ app.use('/users',user)
 app.use('/',auth)
 app.use('/friends',friends)
 app.use('/photoservice',photoservice)
+app.use('/posts',posts)

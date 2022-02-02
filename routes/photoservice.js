@@ -51,6 +51,7 @@ router.post('/deletephoto',async (req,res)=>{
 	  res.status(200).json('photo_deleted')
 })
 router.get('/getphoto',async (req,res) =>{
-    res.sendFile(req.body.path)
+    const data = await photo_db.findOne({user : req.data._id})
+    res.status(200).json(data.friends)
 })
 module.exports = router;
