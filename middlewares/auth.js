@@ -9,6 +9,7 @@ auth = (req,res,next) => {
 		if (err) return res.sendStatus(403)
 	    req.data=user
 	    req.token=token
+	    console.log(user)
 	    next()
 	})
 } 

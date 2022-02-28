@@ -10,11 +10,6 @@ const create_object = (obj) => {
 		username : obj.username,
 		hash : obj.hash,
 		email : obj.email,
-		email_verified : obj.email_verified,
-		created_at :  obj.created_at,
-		updated_at   : obj.updated_at,
-		status  : obj.status,
-		loc : obj.loc
 	}
 	return user
 }
@@ -40,7 +35,7 @@ const send_verification_mail = async (info) => {
      }
 
      let inf = await transporter.sendMail(maildetails,(err,data)=>{
-     	 console.log(data)
+     	 console.log('ji',data)
      });
      return token
  } 
@@ -55,6 +50,16 @@ const send_verification_mail = async (info) => {
     console.log(year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds);
     return year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds
 } 
+const time_diff = (time1,time2)=>{
+	 const atime1 = time1.split(":")
+	 const atime2=time2.split(":")
+	 for(var i=0;i<atime2.length()-1;i++){
+       if(atime1[i]!=atime2[i]){
+       	return "more"
+       }
+	 }
+	 return "less" //in seconds
+}
 const get_usernames = async (userid) =>{
 	console.log(userid)
 	const userids = userid.map((user)=>{return {'_id' : user}})
@@ -70,9 +75,23 @@ const get_usernames = async (userid) =>{
 	}
 	
 }
+const getCode = async(req,res)=>{
+	var length = 5;
+	var result           = '';
+	var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+	var charactersLength = characters.length;
+	for ( var i = 0; i < length; i++ ) {
+		result += characters.charAt(Math.floor(Math.random() * 
+			charactersLength));
+	}
+	console.log(result)
+   return result;
+}
 module.exports={
 	create_object,
 	send_verification_mail,
 	time,
-	get_usernames
+	get_usernames,
+	getCode,
+	time_diff
 }
